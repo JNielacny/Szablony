@@ -9,30 +9,32 @@ using namespace std;
  *  Tutaj trzeba opisac klase. Jakie pojecie modeluje ta klasa
  *  i jakie ma glowne cechy.
  */
+template <typename STyp, int SWymiar>
+
 class Wektor {
   /*
    *  Tutaj trzeba wstawic definicje odpowiednich pol i metod prywatnych
    */
   private:
-  double Tab[ROZMIAR];
+  STyp Tab[SWymiar];
 
   public:
   /*
    *  Tutaj trzeba wstawic definicje odpowiednich metod publicznych
    */
   /*
-  double &set_Tab(int x);
-  double get_Tab(int x);
+  STyp &set_Tab(int x);
+  STyp get_Tab(int x);
   */
  
-  double &operator [](int x);
-  double operator [](int x) const;
+  STyp &operator [](int x);
+  STyp operator [](int x) const;
 
   Wektor operator +(Wektor Wart);  /*Wart w sensie wartość komórki*/
   Wektor operator -(Wektor Wart);
-  Wektor operator *(double Wart);
-  Wektor operator /(double Wart);
-  double operator *(Wektor Wart);
+  Wektor operator *(STyp Wart);
+  Wektor operator /(STyp Wart);
+  STyp operator *(Wektor Wart);
 };
 
 
@@ -43,7 +45,9 @@ class Wektor {
  * znalezc w pliku:
  *    ~bk/edu/kpo/zalecenia.txt 
  */
-std::istream& operator >> (std::istream &Strm, Wektor &Wek);
+template <typename STyp, int SWymiar>
+
+std::istream& operator >> (std::istream &Strm, Wektor<STyp, SWymiar> &Wek);
 
 /*
  * To przeciazenie trzeba opisac. Co ono robi. Jaki format
@@ -52,6 +56,7 @@ std::istream& operator >> (std::istream &Strm, Wektor &Wek);
  * znalezc w pliku:
  *    ~bk/edu/kpo/zalecenia.txt 
  */
-std::ostream& operator << (std::ostream &Strm, const Wektor &Wek);
+template <typename STyp, int SWymiar>
+std::ostream& operator << (std::ostream &Strm, const Wektor<STyp, SWymiar>  &Wek);
 
 #endif

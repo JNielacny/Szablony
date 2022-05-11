@@ -16,17 +16,9 @@ using namespace std;
 
 
 int main()
-{ char znak;
-  UkladRownanLiniowych   UklRown;   // To tylko przykladowe definicje zmiennej
-  cin >> znak;
-  switch(znak)
-  {
-    case 'z':
-    break;
-
-    case 'r':
-    break;
-  }  
+{
+  UkladRownanLiniowych<STyp,SWymiar>   UklRown;   // To tylko przykladowe definicje zmiennej
+  
   cout << endl << " Start programu " << endl << endl;
   cin >> UklRown;
   cout << UklRown << endl;

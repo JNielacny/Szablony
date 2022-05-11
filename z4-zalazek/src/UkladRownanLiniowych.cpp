@@ -3,18 +3,20 @@
 using namespace std;
 /*
  *  Tutaj nalezy zdefiniowac odpowiednie metody
- *  klasy UkladRownanLiniowych, ktore zawieraja 
+ *  klasy UkladRownanLiniowych<STyp,SWymiar>, ktore zawieraja 
  *  wiecej kodu niz dwie linijki.
  *  Mniejsze metody mozna definiwac w ciele klasy.
  */
 
-std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych &UklRown)
+template <typename STyp, int SWymiar>
+std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych<STyp,SWymiar> &UklRown)
 {
     Strm>>UklRown.set_Matrix()>>UklRown.set_WWolny();
     return Strm;
 }
 
-std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych &UklRown)
+template <typename STyp, int SWymiar>
+std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych<STyp,SWymiar> &UklRown)
 {
     Strm<<"Macierz transpowana wynosi: "<<endl;
     Strm<<UklRown.get_Matrix();
@@ -25,22 +27,24 @@ std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych &UklR
     return Strm;
 }
 
-void Macierz::Gauss()
+template <typename STyp, int SWymiar>
+void Macierz<STyp,SWymiar>::Gauss()
 {
     int a=1;
     int x,z,p ;
-    Wektor odej; /*wartość która odejmiemy*/    
-    double ilor;   /*iloraz*/
-    double suma;
-    Macierz Copied=*this;
+    Wektor<STyp,SWymiar><STyp,SWymiar> odej; /*wartość która odejmiemy*/    
+ 
+    STyp ilor;   /*iloraz*/
+    STyp suma;
+    Macierz<STyp,SWymiar> Copied=*this;
 
-    for(x=0; x<ROZMIAR; x++)
+    for(x=0; x<SWymiar; x++)
     {
-        for(z=0; z<ROZMIAR; z++)
+        for(z=0; z<SWymiar; z++)
         {
             if(Copied[x][x]!=0)
             {
-               for(p=x+1; p<ROZMIAR; p++)
+               for(p=x+1; p<SWymiar; p++)
                 {
                     ilor=Copied[p][x]/Copied[x][x];
                     odej=Copied[x]*ilor;
@@ -49,7 +53,7 @@ void Macierz::Gauss()
             }
             else
             {
-                for(p=x+1; p<ROZMIAR; p++)
+                for(p=x+1; p<SWymiar; p++)
                 {
                     if(Copied[p][x]==0)
                     {
@@ -65,28 +69,29 @@ void Macierz::Gauss()
         }
     }
     suma=1;
-    for(x=0; x<ROZMIAR; x++)
+    for(x=0; x<SWymiar; x++)
     {
         suma=suma*Copied[x][x];
     }
     suma=suma*a;
     Wyzn=suma;
     /*
-    cout << "Wyznacznik macierzy wynosi: " << endl;
+    cout << "Wyznacznik Macierzy wynosi: " << endl;
     cout << Wyzn << endl; 
     */
 }
 
-void UkladRownanLiniowych::Cramer()
+template <typename STyp, int SWymiar>
+void UkladRownanLiniowych<STyp,SWymiar>::Cramer()
 {
 int x;
-    double Tabwyz[ROZMIAR];
-    double Wyznacznik;
+    STyp Tabwyz[SWymiar];
+    STyp Wyznacznik;
     Matrix.Gauss();
     Wyznacznik=Matrix.get_Wyzn();
-    Macierz Tabxyz;
+    Macierz<STyp,SWymiar> Tabxyz;
 
-    for(x=0;x<ROZMIAR;x++)
+    for(x=0;x<SWymiar;x++)
     {
         Tabxyz=Matrix;
         Tabxyz.Zamien(WWolny,x);
@@ -96,15 +101,15 @@ int x;
 
     if(Wyznacznik!=0)
     {
-        for(x=0; x<ROZMIAR; x++)
+        for(x=0; x<SWymiar; x++)
         {
             Wynik[x]=Tabwyz[x]/Wyznacznik;
         }
-    }
+     }
     else if(Wyznacznik==0)
     {
         bool Nieoznaczony=true;
-        for(x=0;x<ROZMIAR;x++)
+        for(x=0;x<SWymiar;x++)
         {
             if(Wyznacznik!=0)
             {
@@ -118,13 +123,14 @@ int x;
         {
             cout<<"Układ jest nieoznaczony"<<endl;
         }
-    }
+    }                                                                                               
 }
 
-void UkladRownanLiniowych::WBledu()
+template <typename STyp, int SWymiar>
+void UkladRownanLiniowych<STyp,SWymiar>::WBledu()
 {
     Blad=Matrix*Wynik-WWolny;
     dlugosc=sqrt(Blad*Blad);
     cout<<"Wektor bledu:  "<<Blad<<endl;
-    cout<<"Dlugosc wektora bledu:  "<<dlugosc<<endl;
+    cout<<"Dlugosc Wektora bledu:  "<<dlugosc<<endl;
 }
