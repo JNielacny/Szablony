@@ -4,6 +4,6 @@
 
 #include <cmath>
 #include <algorithm>
-#define ROZMIAR   3
+#define ROZMIAR   5
 
 #endif

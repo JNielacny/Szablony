@@ -17,8 +17,7 @@ using namespace std;
 
 int main()
 {
-  UkladRownanLiniowych<STyp,SWymiar>   UklRown;   // To tylko przykladowe definicje zmiennej
-  
+  /*UkladRownanLiniowych<STyp,SWymiar>   UklRown;   // To tylko przykladowe definicje zmiennej
   cout << endl << " Start programu " << endl << endl;
   cin >> UklRown;
   cout << UklRown << endl;
@@ -29,4 +28,5 @@ int main()
   cout << endl;
   UklRown.WBledu();
   cout << endl;
+  */
   }
