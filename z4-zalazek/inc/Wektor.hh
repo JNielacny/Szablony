@@ -2,6 +2,7 @@
 #define WEKTOR_HH
 
 #include "rozmiar.h"
+#include "LZespolona.hh"
 #include <iostream>
 
 using namespace std;

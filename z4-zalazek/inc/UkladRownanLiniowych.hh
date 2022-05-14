@@ -2,6 +2,7 @@
 #define UKLADROWNANLINIOWYCH_HH
 
 #include <iostream>
+#include <iomanip>
 #include "Wektor.hh"
 #include "Macierz.hh"
 
@@ -180,9 +181,9 @@ template <typename STyp, int SWymiar>
 void UkladRownanLiniowych<STyp,SWymiar>::WBledu()
 {
     Blad=Matrix*Wynik-WWolny;
-    dlugosc=sqrt(Blad*Blad);
-    cout<<"Wektor bledu:  "<<Blad<<endl;
-    cout<<"Dlugosc Wektora bledu:  "<<dlugosc<<endl;
+  /*  dlugosc=sqrt(Blad*Blad); */
+    cout<<"Wektor bledu:  "<<scientific<<setprecision(2)<<Blad<<endl;
+  /*  cout<<"Dlugosc Wektora bledu:  "<<scientific<<setprecision(2)<<dlugosc<<endl; */
 }
 
 #endif
